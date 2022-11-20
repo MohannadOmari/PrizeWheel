@@ -1,9 +1,45 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<br />
-<br />
-<br />
-<div class="text-center">
-    <h1 class="display-4">Spin Wheel will be here</h1>
+
+
+<div class="canvasContainer">
+    <canvas id='canvas' width='700' height='350'>
+        Canvas not supported, use another browser.
+    </canvas>
+    <img src="~/pointer.png" alt="V" id="pointer" />
+    <button class="btn btn-primary" onclick="theWheel.startAnimation(); disabled = true;">Spin The Wheel</button>
 </div>
+
+
+
+<script>
+    let theWheel = new Winwheel({
+        'numSegments': 3,
+        'segments': [
+        {'fillStyle': 'blue', 'text': 'hello'},
+        {'fillStyle': 'cyan', 'text': 'henlo'},
+        {'fillStyle': 'crimson', 'text': 'hola'}
+        ],
+        'animation': {
+            'type': 'spinToStop',
+            'duration': 5,
+            'spins': 10,
+            'callbackFinished' : 'alertPrize()',
+        },
+        'responsive': true,
+        'lineWidth': 3,
+        'pointerGuide' :        // Turn pointer guide on.
+        {
+            'display'     : true,
+            'strokeStyle' : 'yellow',
+            'lineWidth'   : 5
+        }
+    });
+
+    function alertPrize() {
+        let winningSegment = theWheel.getIndicatedSegment();
+
+        alert(winningSegment.text + " friend");
+    }
+</script>
