@@ -1,7 +1,13 @@
+using UmniahPrizeWheel.Context;
+using UmniahPrizeWheel.Repository;
+using UmniahPrizeWheel.Repository.Interface;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<DapperContext>();
+builder.Services.AddScoped<IInventoryRepository,InventoryRepository>();
 
 var app = builder.Build();
 
