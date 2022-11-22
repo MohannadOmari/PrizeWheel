@@ -1,5 +1,6 @@
 ﻿@model List<string>
 @{
+    int count = 0;
     ViewData["Title"] = "Home Page";
 }
 
@@ -14,13 +15,19 @@
 
 
 <script>
+    let segementsColor = [];
+    for (let i = 0; i < @Model.Count; i++) {
+        const color = '#'+Math.floor(Math.random() * 16777215).toString(16);
+        segementsColor.push(color);
+    }
+
     let theWheel = new Winwheel({
         'numSegments': @Model.Count,
         'segments': [ //add more segments here depending on how many items are in inventory
-        {'fillStyle': 'blue', 'text': '@Model[0]'},
-        {'fillStyle': 'cyan', 'text': '@Model[1]'},
-        {'fillStyle': 'crimson', 'text': '@Model[2]'},
-        {'fillStyle': 'navy', 'text': '@Model[3]'}
+            { 'fillStyle': segementsColor[0], 'text': '@Model[0]' },
+            { 'fillStyle': segementsColor[1], 'text': '@Model[1]' },
+            { 'fillStyle': segementsColor[2], 'text': '@Model[2]' },
+            { 'fillStyle': segementsColor[3], 'text': '@Model[3]' }
         ],
         'animation': {
             'type': 'spinToStop',
