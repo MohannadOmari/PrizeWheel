@@ -1,6 +1,5 @@
 ﻿@model List<string>
 @{
-    int count = 0;
     ViewData["Title"] = "Home Page";
 }
 
@@ -13,7 +12,7 @@
     <button class="btn btn-primary" onclick="PrizeWon(); this.disabled = true;">Spin The Wheel</button>
 </div>
 
-
+<script src="~/js/confetti.js"></script>
 <script>
     let segementsColor = [];
     for (let i = 0; i < @Model.Count; i++) {
@@ -80,8 +79,10 @@
     }
 
     function alertPrize() {
-        let winningSegment = theWheel.getIndicatedSegment();
+        startConfetti();
 
-        alert(winningSegment.text + " friend");
+        let winningSegment = theWheel.getIndicatedSegment();
+        
+        alert("Congratulations you won (a) " + winningSegment.text);
     }
 </script>
