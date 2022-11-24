@@ -14,24 +14,23 @@
 
 <script src="~/js/confetti.js"></script>
 <script>
-    let segementsColor = [];
+    let segmentsText = @Html.Raw(Json.Serialize(Model));
+    let segments = [];
     for (let i = 0; i < @Model.Count; i++) {
         const color = '#'+Math.floor(Math.random() * 16777215).toString(16);
-        segementsColor.push(color);
+        segments.push({
+            'fillStyle': color,
+            'text': segmentsText[i]
+        })
     }
 
     let theWheel = new Winwheel({
         'numSegments': @Model.Count,
-        'segments': [ //add more segments here depending on how many items are in inventory
-            { 'fillStyle': segementsColor[0], 'text': '@Model[0]' },
-            { 'fillStyle': segementsColor[1], 'text': '@Model[1]' },
-            { 'fillStyle': segementsColor[2], 'text': '@Model[2]' },
-            { 'fillStyle': segementsColor[3], 'text': '@Model[3]' }
-        ],
+        'segments': segments,
         'animation': {
             'type': 'spinToStop',
             'duration': 5,
-            'spins': 10,
+            'spins': 20,
             'callbackFinished' : 'alertPrize()',
         },
         'responsive': true,
